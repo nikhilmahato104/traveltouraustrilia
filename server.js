@@ -76,5 +76,4 @@ app.listen(PORT, () => {
 //mongodb+srv://nikhilmahato104:9ESRbPOWocuIRVaF@tourbookingaustrilia.dg9qw.mongodb.net/tourbookingaustrilia?retryWrites=true&w=majority
 
 
-
-
+//ading the code for the server.js file

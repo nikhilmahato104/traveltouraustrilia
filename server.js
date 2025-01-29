@@ -70,10 +70,3 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-//password 9ESRbPOWocuIRVaF   username nikhilmahato104
-//mongodb+srv://nikhilmahato104:<db_password>@tourbookingaustrilia.dg9qw.mongodb.net/
-//mongodb+srv://nikhilmahato104:<db_password>@tourbookingaustrilia.dg9qw.mongodb.net/
-//mongodb+srv://nikhilmahato104:9ESRbPOWocuIRVaF@tourbookingaustrilia.dg9qw.mongodb.net/tourbookingaustrilia?retryWrites=true&w=majority
-
-
-//ading the code for the server.js file

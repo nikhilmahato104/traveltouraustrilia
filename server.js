@@ -77,7 +77,6 @@
 // app.listen(PORT, () => {
 //   console.log(`Server is running on port ${PORT}`);
 // });
-// Load environment variables
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -98,7 +97,7 @@ mongoose.connect(MONGODB_URI)
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch((err) => console.error('Error connecting to MongoDB:', err));
 
-// Create a schema for the booking form with realDate and gmtDate
+// Create a schema for the booking form with a single bookingDate field
 const bookingSchema = new mongoose.Schema({
   name: String,
   telephone: String,
@@ -106,13 +105,9 @@ const bookingSchema = new mongoose.Schema({
   members: Number,
   address: String,
   countryCode: String,
-  realDate: {
+  bookingDate: {
     type: Date,
-    default: () => new Date(),  // Set default to the current local date/time
-  },
-  gmtDate: {
-    type: Date,
-    default: () => new Date().toISOString(),  // Set default to the current date/time in GMT (ISO format)
+    required: true, // Ensure the user provides a date
   },
 });
 
@@ -121,7 +116,7 @@ const Booking = mongoose.model('Booking', bookingSchema);
 
 // API endpoint to handle form submission (POST request)
 app.post('/api/bookings', async (req, res) => {
-  const { name, telephone, country, members, address, countryCode } = req.body;
+  const { name, telephone, country, members, address, countryCode, bookingDate } = req.body;
 
   // Log each field with its name when the form is submitted
   console.log('Received Booking Data:');
@@ -131,6 +126,7 @@ app.post('/api/bookings', async (req, res) => {
   console.log(`members: ${members}`);
   console.log(`address: ${address}`);
   console.log(`countryCode: ${countryCode}`);
+  console.log(`bookingDate: ${bookingDate}`);
 
   // Create a new booking entry
   const newBooking = new Booking({
@@ -140,10 +136,7 @@ app.post('/api/bookings', async (req, res) => {
     members,
     address,
     countryCode,
-    // Real Date stores local date based on server's local time
-    realDate: new Date(),  // This will store the date and time at the moment the booking is made.
-    // GMT Date stores the date in UTC, which ensures consistency regardless of time zone.
-    gmtDate: new Date().toISOString(),
+    bookingDate,  // Use the date provided by the user
   });
 
   try {

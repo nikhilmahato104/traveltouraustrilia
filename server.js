@@ -19,7 +19,7 @@ mongoose.connect(MONGODB_URI)
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch((err) => console.error('Error connecting to MongoDB:', err));
 
-// Create a schema for the booking form
+// Create a schema for the booking form with realDate and gmtDate
 const bookingSchema = new mongoose.Schema({
   name: String,
   telephone: String,
@@ -27,6 +27,14 @@ const bookingSchema = new mongoose.Schema({
   members: Number,
   address: String,
   countryCode: String,
+  realDate: {
+    type: Date,
+    default: () => new Date(), // Set default to the current local date/time
+  },
+  gmtDate: {
+    type: Date,
+    default: () => new Date().toISOString(), // Set default to the current date/time in GMT (ISO format)
+  },
 });
 
 // Create a model for the booking data
@@ -69,4 +77,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-

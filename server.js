@@ -1,25 +1,25 @@
-// // Load environment variables
-// require('dotenv').config();
+// Load environment variables
+require('dotenv').config();
 
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-// // Initialize Express app
-// const app = express();   
-// app.use(cors());
-// app.use(bodyParser.json());  // To parse JSON bodies from incoming requests
+// Initialize Express app
+const app = express();   
+app.use(cors());
+app.use(bodyParser.json());  // To parse JSON bodies from incoming requests
 
-// // MongoDB URI from environment variables
-// const MONGODB_URI = process.env.MONGODB_URI;
+// MongoDB URI from environment variables
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// // Connect to MongoDB (without deprecated options)
-// mongoose.connect(MONGODB_URI)
-//   .then(() => console.log('Connected to MongoDB Atlas'))
-//   .catch((err) => console.error('Error connecting to MongoDB:', err));
+// Connect to MongoDB (without deprecated options)
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch((err) => console.error('Error connecting to MongoDB:', err));
 
-// // Create a schema for the booking form with realDate and gmtDate
+// Create a schema for the booking form with realDate and gmtDate
 // const bookingSchema = new mongoose.Schema({
 //   name: String,
 //   telephone: String,
@@ -40,7 +40,7 @@
 // // Create a model for the booking data
 // const Booking = mongoose.model('Booking', bookingSchema);
 
-// // API endpoint to handle form submission (POST request)
+// API endpoint to handle form submission (POST request)
 // app.post('/api/bookings', async (req, res) => {
 //   const { name, telephone, country, members, address, countryCode } = req.body;
 
@@ -72,8 +72,8 @@
 //   }
 // });
 
-// // Start the server
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

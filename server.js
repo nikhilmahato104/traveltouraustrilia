@@ -127,6 +127,14 @@ app.post('/api/bookings', async (req, res) => {
   console.log(`address: ${address}`);
   console.log(`countryCode: ${countryCode}`);
   console.log(`bookingDate: ${bookingDate}`);
+  
+  // Make sure we only store the `bookingDate` from the form, not the current date.
+  const parsedBookingDate = new Date(bookingDate);  // Ensure that it's parsed correctly from the client
+
+  // Validate that the date is a valid Date object
+  if (isNaN(parsedBookingDate)) {
+    return res.status(400).json({ error: 'Invalid booking date provided.' });
+  }
 
   // Create a new booking entry
   const newBooking = new Booking({
@@ -136,7 +144,7 @@ app.post('/api/bookings', async (req, res) => {
     members,
     address,
     countryCode,
-    bookingDate,  // Use the date provided by the user
+    bookingDate: parsedBookingDate,  // Use the date provided by the user
   });
 
   try {

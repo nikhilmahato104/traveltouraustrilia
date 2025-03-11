@@ -97,6 +97,17 @@ mongoose.connect(MONGODB_URI)
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch((err) => console.error('Error connecting to MongoDB:', err));
 
+
+//here the code change 
+//  Admin Route  
+app.get('/admin', (req, res) => {
+  res.send('<h1>Hello, this is the Admin Panel</h1>');
+});
+// .........................
+
+
+
+
 // Create a schema for the booking form with a single bookingDate field
 const bookingSchema = new mongoose.Schema({
   name: String,
